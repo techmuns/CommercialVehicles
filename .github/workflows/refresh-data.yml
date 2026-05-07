@@ -1,0 +1,103 @@
+# Live data refresh for the PV dashboard.
+#
+# Triggers (zero manual action required):
+#   - Every push to main (skipping the bot's own commits to avoid loops)
+#   - Daily cron at 09:00 IST (03:30 UTC)
+#   - Manual: Actions tab → "Run workflow"
+#
+# Each fetcher step uses continue-on-error so one source failing doesn't
+# kill the whole refresh. The final write-meta step records every step's
+# outcome and the timestamp into placeholder_data.json under _meta, so
+# the dashboard can show "Last refreshed: 5 min ago" / "fetcher X
+# failed" without the user opening GitHub.
+
+name: Refresh dashboard data
+
+on:
+  schedule:
+    - cron: '30 3 * * *'           # 03:30 UTC = 09:00 IST, every day
+  workflow_dispatch:                 # manual trigger
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'data/config/placeholder_data.json'   # don't loop on the bot's own data writes
+      - 'data/config/raw_extracts.json'
+      - 'data/config/press_text/**'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      # ────────── fetchers ──────────
+      # continue-on-error: failures recorded into _meta, not fatal.
+
+      - name: Stock prices (Yahoo Finance / NSE)
+        id: stock
+        continue-on-error: true
+        run: node scripts/fetch-stock.mjs
+
+      # NOTE: scripts/fetch-maruti.mjs (Yahoo Finance quoteSummary) is
+      # disabled — Yahoo's API rate-limits GitHub Actions runner IPs,
+      # and the press-release fetcher below already covers Net Sales,
+      # PAT, and FY volumes from Maruti's own published numbers.
+
+      - name: Maruti FY24/FY25 sales + revenue (Maruti press releases)
+        id: maruti_press
+        continue-on-error: true
+        run: node scripts/fetch-maruti-press.mjs
+
+      - name: Hyundai FY24/FY25 financials + volumes (HMIL standalone PR)
+        id: hyundai
+        continue-on-error: true
+        run: node scripts/fetch-hyundai.mjs
+
+      - name: M&M FY24/FY25 auto + financials (Mahindra press releases)
+        id: mm
+        continue-on-error: true
+        run: node scripts/fetch-mm.mjs
+
+      - name: Tata Motors PV FY24/FY25 (Tata press releases, PV segment)
+        id: tata
+        continue-on-error: true
+        run: node scripts/fetch-tata.mjs
+
+      # ────────── stamp refresh status ──────────
+      - name: Write _meta block (last refresh + per-fetcher status)
+        run: node scripts/write-meta.mjs
+        env:
+          STOCK_OUTCOME:        ${{ steps.stock.outcome }}
+          MARUTI_PRESS_OUTCOME: ${{ steps.maruti_press.outcome }}
+          HYUNDAI_OUTCOME:      ${{ steps.hyundai.outcome }}
+          MM_OUTCOME:           ${{ steps.mm.outcome }}
+          TATA_OUTCOME:         ${{ steps.tata.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      # ────────── commit & push ──────────
+      - name: Commit + push if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/config/
+          if git diff --staged --quiet; then
+            echo "No data changes — nothing to commit."
+            exit 0
+          fi
+          git commit -m "data: auto-refresh ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+          git push
