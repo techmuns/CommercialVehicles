@@ -221,12 +221,13 @@ export default function PerformanceSection({ company }) {
   const [coverageOpen, setCoverageOpen] = useState(false)
 
   const oemKey = company.shortName || company.name
+  const industryLabel = company.industryLabel || '2W industry'
   const industryMeta = getIndustryMeta()
 
   // ---- Left chart data ----
   const growthRows = useMemo(
-    () => getTvsGrowthVsIndustry(performance.growth?.oem, oemKey),
-    [performance.growth?.oem, oemKey],
+    () => getTvsGrowthVsIndustry(performance.growth?.oem, oemKey, performance.growth?.industry),
+    [performance.growth?.oem, performance.growth?.industry, oemKey],
   )
   const growthHasOem = growthRows.some((r) => typeof r[oemKey] === 'number')
 
@@ -357,7 +358,7 @@ export default function PerformanceSection({ company }) {
           <div className="chart-panel-head">
             <div className="chart-panel-row1">
               <div className="min-w-0">
-                <div className="chart-panel-title">{oemKey} growth vs 2W industry</div>
+                <div className="chart-panel-title">{oemKey} growth vs {industryLabel}</div>
                 <div className="chart-panel-sub">Volume Growth % · FY18–FY27 · forecast lighter</div>
               </div>
               <span className="bsr-pill">%</span>
@@ -369,7 +370,7 @@ export default function PerformanceSection({ company }) {
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-sm" style={{ background: '#CBD5E1' }} />
-                2W Industry
+                {industryLabel}
               </span>
             </div>
           </div>
@@ -388,7 +389,7 @@ export default function PerformanceSection({ company }) {
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-sm" style={{ background: '#CBD5E1' }} />
-                2W industry domestic volume growth %
+                {industryLabel} volume growth %
               </span>
             </div>
             <div className="chart-source">Source: Annual reports · Vahan · FADA</div>

@@ -25,15 +25,15 @@ export function getIndustryMeta() {
 
 // Build a row-per-FY dataset for the left "growth vs industry" chart.
 // shortName goes in as the OEM series key so the chart legend reads naturally.
-export function getTvsGrowthVsIndustry(oemSeries, shortName) {
-  const industry = getIndustryGrowthSeries()
-  const meta = getIndustryMeta()
+export function getTvsGrowthVsIndustry(oemSeries, shortName, industryOverride = null) {
+  const industry = Array.isArray(industryOverride) ? industryOverride : getIndustryGrowthSeries()
+  const forecastYears = industryOverride ? [] : getIndustryMeta().forecastYears
   const startIdx = FY.indexOf('FY18')
   return FY.slice(startIdx).map((fy, i) => ({
     fy,
     [shortName]: oemSeries?.[startIdx + i] ?? null,
     Industry: industry[startIdx + i],
-    isForecast: meta.forecastYears.includes(fy),
+    isForecast: forecastYears.includes(fy),
   }))
 }
 
@@ -144,8 +144,8 @@ export function getStatusReason(company, status) {
 }
 
 // Short source label for the mix charts.
-export function getMixSource() {
-  return 'Source: Annual reports · Vahan'
+export function getMixSource(company) {
+  return company?.modelSource || 'Source: Annual reports · Vahan'
 }
 
 // Volume growth YoY between two FYs, given the per-FY total map. Returns null

@@ -12,7 +12,7 @@ const rowsToCsv = (rows) => rows.map((r) => r.map(csvCell).join(',')).join('\n')
 export function exportCompanyCsv(company, FY) {
   const sections = []
 
-  sections.push([`# ${company.name} — 2W Industry Dashboard export`])
+  sections.push([`# ${company.name} — Auto Industry Dashboard export`])
   sections.push([`# Generated ${new Date().toISOString()}`])
   sections.push([''])
 
@@ -27,15 +27,19 @@ export function exportCompanyCsv(company, FY) {
   sections.push([''])
 
   if (company.performance) {
+    const growth = company.performance.growth || {}
     sections.push(['## Performance — Growth (YoY %)'])
     sections.push(['', ...FY])
-    sections.push(['OEM', ...company.performance.growth.oem])
-    sections.push(['Industry', ...company.performance.growth.industry])
+    sections.push(['OEM', ...(growth.oem || [])])
+    sections.push(['Industry', ...(growth.industry || [])])
     sections.push([''])
-    sections.push(['## Performance — Mix %'])
-    sections.push(['Series', ...FY])
-    company.performance.mix.forEach((s) => sections.push([s.name, ...s.values]))
-    sections.push([''])
+    const mix = company.performance.mix || []
+    if (mix.length) {
+      sections.push(['## Performance — Mix %'])
+      sections.push(['Series', ...FY])
+      mix.forEach((s) => sections.push([s.name, ...s.values]))
+      sections.push([''])
+    }
   }
 
   sections.push(['## Product-Level Drivers'])
@@ -71,7 +75,7 @@ export function exportCompanyCsv(company, FY) {
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
-  link.download = `2w-dashboard-${company.id}-${new Date().toISOString().slice(0, 10)}.csv`
+  link.download = `auto-dashboard-${company.id}-${new Date().toISOString().slice(0, 10)}.csv`
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)

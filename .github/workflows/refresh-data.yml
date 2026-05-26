@@ -23,6 +23,8 @@ on:
       - 'data/config/placeholder_data.json'   # don't loop on the bot's own data writes
       - 'data/config/raw_extracts.json'
       - 'data/config/press_text/**'
+      - 'src/data/companies/**'                # 2W Screener fetcher writes
+      - 'src/data/industry/**'                 # 2W Vahan / FADA fetcher writes
 
 permissions:
   contents: write
@@ -78,6 +80,30 @@ jobs:
         continue-on-error: true
         run: node scripts/fetch-tata.mjs
 
+      # ────────── two-wheeler sector fetchers ──────────
+      # Write into src/data/{companies,industry}; bundled at build time.
+      # continue-on-error so a 2W source failing never blocks the PV refresh.
+
+      - name: 2W financials (Screener — TVS / Bajaj / Hero / Eicher / Ola)
+        id: screener
+        continue-on-error: true
+        run: |
+          for t in TVSMOTOR BAJAJ-AUTO HEROMOTOCO EICHERMOT OLAELEC; do
+            echo "::group::Screener $t"
+            node scripts/fetch-screener.mjs "$t" || echo "screener $t failed (continuing)"
+            echo "::endgroup::"
+          done
+
+      - name: 2W EV / total registrations (Vahan)
+        id: vahan
+        continue-on-error: true
+        run: node scripts/fetch-vahan.mjs
+
+      - name: 2W monthly retail (FADA)
+        id: fada
+        continue-on-error: true
+        run: node scripts/fetch-fada.mjs
+
       # ────────── stamp refresh status ──────────
       - name: Write _meta block (last refresh + per-fetcher status)
         run: node scripts/write-meta.mjs
@@ -94,7 +120,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/config/
+          git add data/config/ src/data/companies/ src/data/industry/
           if git diff --staged --quiet; then
             echo "No data changes — nothing to commit."
             exit 0

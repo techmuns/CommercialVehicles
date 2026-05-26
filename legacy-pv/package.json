@@ -1,0 +1,14 @@
+{
+  "name": "pv-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PV industry buy-side dashboard — static site served by a Cloudflare Worker with Static Assets",
+  "scripts": {
+    "dev": "npx wrangler dev",
+    "deploy": "npx wrangler deploy"
+  },
+  "devDependencies": {
+    "pdf-parse": "^1.1.1",
+    "wrangler": "^4.0.0"
+  }
+}

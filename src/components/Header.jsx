@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { SECTOR_META } from '../data.js'
 import { verificationsForCompany, rollupStatus, statusLabel } from '../data/verification.js'
 
 const SignalClass = {
@@ -38,11 +37,19 @@ function DownloadIcon() {
   )
 }
 
-export default function Header({ company, companies, onSelectCompany, onExport }) {
+export default function Header({
+  company, companies, sectors = [], activeSectorId, meta,
+  onSelectSector, onSelectCompany, onExport,
+}) {
   const [open, setOpen] = useState(false)
+  const [sectorOpen, setSectorOpen] = useState(false)
   const ref = useRef(null)
+  const sectorRef = useRef(null)
   useEffect(() => {
-    const close = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false) }
+    const close = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+      if (sectorRef.current && !sectorRef.current.contains(e.target)) setSectorOpen(false)
+    }
     window.addEventListener('mousedown', close)
     return () => window.removeEventListener('mousedown', close)
   }, [])
@@ -53,28 +60,53 @@ export default function Header({ company, companies, onSelectCompany, onExport }
       style={{ background: 'linear-gradient(95deg, #4F46E5 0%, #6D28D9 55%, #7C3AED 100%)' }}
     >
       <div className="max-w-[1480px] mx-auto px-8 py-4 flex items-center gap-6 flex-wrap">
-        {/* Segment switcher (brand pill) */}
-        <div
-          className="flex items-center pr-3.5 pl-1.5 py-1.5 rounded-xl"
-          style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.22)' }}
-        >
-          <div className="relative w-10 h-10 rounded-md bg-white/95 text-brand-700 font-bold text-[15px] flex items-center justify-center">
-            {SECTOR_META.badge}
-            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#6D28D9]" />
-          </div>
-          <div className="ml-2.5 leading-tight">
-            <div className="flex items-center gap-1 font-semibold text-[16px] tracking-tight">
-              {SECTOR_META.title}
-              <Caret className="opacity-80 ml-0.5" />
+        {/* Segment switcher (brand pill → sector dropdown) */}
+        <div className="relative" ref={sectorRef}>
+          <button
+            type="button"
+            onClick={() => setSectorOpen((v) => !v)}
+            className="flex items-center pr-3.5 pl-1.5 py-1.5 rounded-xl transition-colors hover:bg-white/[0.14]"
+            style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.22)' }}
+          >
+            <div className="relative w-10 h-10 rounded-md bg-white/95 text-brand-700 font-bold text-[15px] flex items-center justify-center">
+              {meta.badge}
+              <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#6D28D9]" />
             </div>
-            <div className="text-[11.5px] text-white/65">{SECTOR_META.subtitle}</div>
-          </div>
+            <div className="ml-2.5 leading-tight text-left">
+              <div className="flex items-center gap-1 font-semibold text-[16px] tracking-tight">
+                {meta.title}
+                <Caret className="opacity-80 ml-0.5" />
+              </div>
+              <div className="text-[11.5px] text-white/65">{meta.subtitle}</div>
+            </div>
+          </button>
+          {sectorOpen && (
+            <div className="absolute top-full left-0 mt-1 w-[280px] bg-white text-slate-800 rounded-lg shadow-lg border border-slate-100 overflow-hidden z-40">
+              {sectors.map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => { onSelectSector?.(s.id); setSectorOpen(false) }}
+                  className={`w-full text-left px-3 py-2.5 flex items-center gap-2.5 text-[13.5px] hover:bg-brand-50 ${
+                    s.id === activeSectorId ? 'bg-brand-50 text-brand-700 font-semibold' : ''
+                  }`}
+                >
+                  <span className="w-7 h-7 rounded-md bg-[#EFEAFE] text-brand-700 font-bold text-[11px] flex items-center justify-center shrink-0">
+                    {s.meta.badge}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate">{s.meta.title}</span>
+                    <span className="block text-[11px] text-slate-400 truncate">{s.meta.subtitle}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Latest data */}
         <div className="flex items-center gap-2">
           <Label>Latest data</Label>
-          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-white/15 text-white">{SECTOR_META.latestFy}</span>
+          <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-white/15 text-white">{meta.latestFy}</span>
         </div>
 
         {/* Company selector */}
