@@ -24,6 +24,7 @@ import bajajScr  from './data/companies/_screener/bajaj.json'
 import heroScr   from './data/companies/_screener/hero.json'
 import eicherScr from './data/companies/_screener/eicher.json'
 import olaScr    from './data/companies/_screener/ola.json'
+import { PV_SECTOR } from './data/sectors/pv/index.js'
 
 const FY_AXIS = ['FY16', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'FY22', 'FY23', 'FY24', 'FY25', 'FY26', 'FY27']
 
@@ -158,3 +159,16 @@ export const SECTOR_META = {
   latestFy: 'FY25',
   footer: 'Source: Annual reports · Exchange filings · Vahan · FADA',
 }
+
+// ---------- Sector registry (PV + 2W) ----------
+// Each sector carries its own header meta + company list. The header's brand
+// pill switches between them; the company dropdown lists the active sector's
+// OEMs. PV is the host repo's primary sector, so it leads.
+const TWOW_SECTOR = {
+  id: '2w',
+  meta: { ...SECTOR_META, id: '2w', defaultCompanyId: 'tvs' },
+  companies: COMPANIES,
+}
+
+export const SECTORS = [PV_SECTOR, TWOW_SECTOR]
+export const DEFAULT_SECTOR_ID = 'pv'

@@ -32,6 +32,13 @@ export const SOURCE_VERIFICATIONS = [
   { key: 'hero-actuals',   label: 'Hero MotoCorp — Standalone Audited FY16–FY25', file: 'src/data/companies/hero.json',   meta: heroRaw.verification,   source: heroRaw.sources?.primary,   sourceUrl: null, scope: 'hero' },
   { key: 'eicher-actuals', label: 'Eicher Motors — Standalone Audited FY16–FY25', file: 'src/data/companies/eicher.json', meta: eicherRaw.verification, source: eicherRaw.sources?.primary, sourceUrl: null, scope: 'eicher' },
   { key: 'ola-actuals',    label: 'Ola Electric — Standalone Audited FY22–FY25', file: 'src/data/companies/ola.json',    meta: olaRaw.verification,    source: olaRaw.sources?.primary,    sourceUrl: null, scope: 'ola' },
+
+  // ---- Passenger-vehicle sector (sourced from data/config, refreshed by refresh-data.yml) ----
+  { key: 'maruti-pv',  label: 'Maruti Suzuki — FY16–FY25 (filings + press releases)',     file: 'data/config/placeholder_data.json', meta: { status: 'audited',     confidence: 'high',   verifiedAgainstPrimary: true },  source: 'NSE / BSE filings · annual reports · quarterly results', sourceUrl: null, scope: 'maruti' },
+  { key: 'hyundai-pv', label: 'Hyundai Motor India — FY16–FY25 (filings + press releases)', file: 'data/config/placeholder_data.json', meta: { status: 'audited',     confidence: 'high',   verifiedAgainstPrimary: true },  source: 'NSE / BSE filings · annual reports · quarterly results', sourceUrl: null, scope: 'hyundai' },
+  { key: 'mm-pv',      label: 'Mahindra & Mahindra — FY16–FY25 (filings + press releases)', file: 'data/config/placeholder_data.json', meta: { status: 'audited',     confidence: 'high',   verifiedAgainstPrimary: true },  source: 'NSE / BSE filings · annual reports · quarterly results', sourceUrl: null, scope: 'mm' },
+  { key: 'tata-pv',    label: 'Tata Motors (PV) — FY16–FY25 (filings + press releases)',   file: 'data/config/placeholder_data.json', meta: { status: 'audited',     confidence: 'high',   verifiedAgainstPrimary: true },  source: 'NSE / BSE filings · annual reports · quarterly results', sourceUrl: null, scope: 'tata' },
+  { key: 'pv-industry', label: 'PV Industry — FY16–FY25 (SIAM / Vahan / FADA estimates)',   file: 'data/config/placeholder_data.json', meta: { status: 'approximate', confidence: 'medium', verifiedAgainstPrimary: false }, source: 'SIAM · Vahan · FADA (industry estimates)', sourceUrl: null, scope: 'pv-industry' },
 ]
 
 export function verificationsForCompany(companyId) {

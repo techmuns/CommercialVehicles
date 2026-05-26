@@ -308,18 +308,23 @@ function GroupedSupportingData({ company }) {
 // LEGACY PATH — supportingData / charts (non-TVS companies)
 // ============================================================================
 function LegacySupportingData({ company }) {
-  const [block, setBlock] = useState('Growth')
-  const data = company.supportingData?.[block]
+  const blocks = company.supportBlocks?.length ? company.supportBlocks : SUPPORT_BLOCKS
+  const [block, setBlock] = useState(blocks[0] || 'Growth')
+  const data = company.supportingData?.[block] || company.supportingData?.[blocks[0]]
   const series = company.charts?.[block] || []
   const cols = data?.columns || []
-  const blurb = {
+  const blurbMap = {
     Growth: 'Revenue, volume, and realisation YoY %.',
     Margins: 'Gross margin (proxy) and EBITDA margin %.',
     'Balance Sheet': 'Leverage, ROCE, and working capital.',
     'Cash Flow': 'OCF, FCF, and capex trajectory.',
     'Product Mix': 'Powertrain / segment mix %.',
     'Market Share': 'Overall and segment-level share %.',
+    Mix: 'SUV, EV, and export volume share %.',
+    Operations: 'Capacity utilisation, capex, and working capital.',
+    Demand: 'Industry volume and YoY growth.',
   }
+  const blurb = (b) => blurbMap[b] || 'FY24 vs FY25 trend.'
 
   if (!data) return null
 
@@ -336,10 +341,10 @@ function LegacySupportingData({ company }) {
             <div className="chart-panel-row1">
               <div className="min-w-0 flex-1">
                 <div className="chart-panel-title">{block}</div>
-                <div className="chart-panel-sub">{blurb[block]}</div>
+                <div className="chart-panel-sub">{blurb(block)}</div>
               </div>
               <div className="w-[180px] shrink-0">
-                <Dropdown value={block} options={SUPPORT_BLOCKS} onChange={setBlock} />
+                <Dropdown value={block} options={blocks} onChange={setBlock} />
               </div>
             </div>
             <div className="chart-panel-meta">
@@ -398,7 +403,7 @@ function LegacySupportingData({ company }) {
             <div className="chart-panel-row1">
               <div className="min-w-0">
                 <div className="chart-panel-title">{block} — 12-year view</div>
-                <div className="chart-panel-sub">{blurb[block]} · FY16–FY27</div>
+                <div className="chart-panel-sub">{blurb(block)} · FY16–FY27</div>
               </div>
               <span className="bsr-pill">FY25</span>
             </div>
