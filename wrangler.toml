@@ -1,7 +1,16 @@
-name = "pv-dashboard"
-compatibility_date = "2025-01-01"
+# Cloudflare Worker (static assets) config for the merged auto-industry
+# dashboard (Passenger Vehicle + Two-Wheeler sectors).
+#
+# Deploy: `npm run deploy` (runs `vite build` then `wrangler deploy`).
+# The build output in ./dist is served directly; no Worker script needed.
+#
+# NOTE: `name` is kept as the original PV worker so deploys update the
+# existing *.workers.dev deployment rather than creating a new one.
 
-# Static-only Worker: no `main` script, just serve the files in this repo.
+name = "pv-dashboard"
+compatibility_date = "2025-05-01"
+
+# Static-only worker: serve the Vite build from ./dist, SPA-fallback to index.html.
 [assets]
-directory = "."
+directory = "./dist"
 not_found_handling = "single-page-application"
