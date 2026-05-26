@@ -25,6 +25,7 @@ import heroScr   from './data/companies/_screener/hero.json'
 import eicherScr from './data/companies/_screener/eicher.json'
 import olaScr    from './data/companies/_screener/ola.json'
 import { PV_SECTOR } from './data/sectors/pv/index.js'
+import { PV_META } from './data/sectors/pv/pvConfig.js'
 
 const FY_AXIS = ['FY16', 'FY17', 'FY18', 'FY19', 'FY20', 'FY21', 'FY22', 'FY23', 'FY24', 'FY25', 'FY26', 'FY27']
 
@@ -150,6 +151,24 @@ const ola = buildOem(olaRaw, olaScr, {
 
 export const FY = FY_AXIS
 export const COMPANIES = [industry, tvs, bajaj, hero, eicher, ola]
+
+// Stamp the 2W "Updated" badge with the pipeline's last-refresh timestamp so it
+// tracks the daily auto-refresh (parity with PV, which reads the same value).
+// Per-source provenance (annual-report / workbook dates) still shows in the
+// Governance and Sources panels via each company's citations.
+const REFRESH_LABEL = (() => {
+  const iso = PV_META?.last_refresh
+  const d = iso ? new Date(iso) : null
+  return d && !isNaN(d)
+    ? d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+    : null
+})()
+if (REFRESH_LABEL) {
+  for (const c of COMPANIES) {
+    if (c.updated && c.updated !== '—') c.updated = REFRESH_LABEL
+  }
+}
+
 export const SUPPORT_BLOCKS = ['Growth', 'Margins', 'Balance Sheet', 'Cash Flow', 'Product Mix', 'Market Share']
 
 export const SECTOR_META = {
