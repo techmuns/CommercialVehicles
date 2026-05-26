@@ -1,7 +1,7 @@
 # Live data refresh for the PV dashboard.
 #
 # Triggers (zero manual action required):
-#   - Every push to main (skipping the bot's own commits to avoid loops)
+#   - Every push to the default branch (skipping the bot's own commits)
 #   - Daily cron at 09:00 IST (03:30 UTC)
 #   - Manual: Actions tab → "Run workflow"
 #
@@ -18,7 +18,7 @@ on:
     - cron: '30 3 * * *'           # 03:30 UTC = 09:00 IST, every day
   workflow_dispatch:                 # manual trigger
   push:
-    branches: [main]
+    branches: [claude/clone-neha-commercial-vehicles-8Hfpd]
     paths-ignore:
       - 'data/config/placeholder_data.json'   # don't loop on the bot's own data writes
       - 'data/config/raw_extracts.json'
