@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/TVSMOTOR/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/TVSMOTOR/consolidated/#quarters"
   },
-  "fetchedAt": "2026-06-10T07:53:04.926Z",
+  "fetchedAt": "2026-06-12T08:09:40.703Z",
   "profitLoss": {
     "periods": [
       "FY15",
@@ -193,7 +193,7 @@
         18,
         23,
         21,
-        0
+        19
       ]
     }
   },
