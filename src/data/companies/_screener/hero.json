@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/HEROMOTOCO/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/HEROMOTOCO/consolidated/#quarters"
   },
-  "fetchedAt": "2026-07-13T06:38:15.902Z",
+  "fetchedAt": "2026-07-14T05:53:19.990Z",
   "profitLoss": {
     "periods": [
       "FY15",
@@ -53,7 +53,7 @@
         30060,
         32554,
         35135,
-        40366
+        40352
       ],
       "Operating Profit": [
         3520,
@@ -67,7 +67,7 @@
         4099,
         5235,
         5789,
-        7045
+        7059
       ],
       "OPM %": [
         13,
@@ -95,7 +95,7 @@
         567,
         689,
         1040,
-        1324
+        1310
       ],
       "Interest": [
         12,
@@ -295,7 +295,7 @@
         6159,
         6232,
         6283,
-        6894
+        6374
       ],
       "CWIP": [
         719,
@@ -309,7 +309,7 @@
         454,
         484,
         487,
-        245
+        765
       ],
       "Investments": [
         3118,
@@ -453,7 +453,7 @@
         85,
         119,
         101,
-        135
+        134
       ]
     }
   },
@@ -541,7 +541,7 @@
         -7,
         -17,
         -11,
-        63
+        -31
       ],
       "ROCE %": [
         50,
@@ -555,7 +555,7 @@
         23,
         29,
         30,
-        36
+        35
       ]
     }
   },
