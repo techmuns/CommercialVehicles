@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/EICHERMOT/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/EICHERMOT/consolidated/#quarters"
   },
-  "fetchedAt": "2026-07-28T06:09:46.603Z",
+  "fetchedAt": "2026-07-29T06:14:35.345Z",
   "profitLoss": {
     "periods": [
       "FY14",
@@ -53,7 +53,7 @@
         10996,
         12206,
         14148,
-        17622
+        17618
       ],
       "Operating Profit": [
         1118,
@@ -67,7 +67,7 @@
         3446,
         4329,
         4723,
-        5785
+        5789
       ],
       "OPM %": [
         13,
@@ -95,7 +95,7 @@
         908,
         1521,
         1994,
-        2229
+        2225
       ],
       "Interest": [
         10,
@@ -295,7 +295,7 @@
         2690,
         2914,
         3473,
-        4385
+        3852
       ],
       "CWIP": [
         419,
@@ -309,7 +309,7 @@
         472,
         555,
         491,
-        203
+        736
       ],
       "Investments": [
         1078,
@@ -397,7 +397,7 @@
         -2397,
         -2834,
         -2461,
-        -2964
+        -2834
       ],
       "Cash from Financing Activity": [
         -162,
@@ -425,7 +425,7 @@
         8,
         45,
         121,
-        -142
+        -12
       ],
       "Free Cash Flow": [
         79,
@@ -453,7 +453,7 @@
         104,
         111,
         107,
-        107
+        106
       ]
     }
   },
@@ -541,7 +541,7 @@
         -14,
         5,
         31,
-        67
+        22
       ],
       "ROCE %": [
         28,
