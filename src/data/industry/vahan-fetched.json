@@ -1,7 +1,7 @@
 {
   "source": "Vahan public analytics dashboard",
   "sourceUrl": "https://analytics.parivahan.gov.in/analytics/",
-  "lastUpdated": "2026-07-31T06:30:26.296Z",
+  "lastUpdated": "2026-08-01T06:15:18.513Z",
   "fetchStatus": "requires_browser_session",
   "notes": [
     "Vahan public reports require a JSF ViewState session token. A simple GET cannot extract the registration breakdown.",
