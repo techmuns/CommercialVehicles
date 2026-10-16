@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/TVSMOTOR/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/TVSMOTOR/consolidated/#quarters"
   },
-  "fetchedAt": "2026-10-15T08:32:06.843Z",
+  "fetchedAt": "2026-10-16T08:26:32.147Z",
   "profitLoss": {
     "periods": [
       "FY15",
@@ -454,7 +454,7 @@
         1044,
         -1280
       ],
-      "CFO/OP": [
+      "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": [
         40,
         134,
         95,

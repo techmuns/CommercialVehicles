@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/BAJAJ-AUTO/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/BAJAJ-AUTO/consolidated/#quarters"
   },
-  "fetchedAt": "2026-10-15T08:32:08.040Z",
+  "fetchedAt": "2026-10-16T08:26:33.325Z",
   "profitLoss": {
     "periods": [
       "FY15",
@@ -454,7 +454,7 @@
         -2273,
         1885
       ],
-      "CFO/OP": [
+      "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": [
         82,
         115,
         108,

@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/EICHERMOT/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/EICHERMOT/consolidated/#quarters"
   },
-  "fetchedAt": "2026-10-15T08:32:10.633Z",
+  "fetchedAt": "2026-10-16T08:26:35.685Z",
   "profitLoss": {
     "periods": [
       "FY14",
@@ -454,7 +454,7 @@
         2951,
         3538
       ],
-      "CFO/OP": [
+      "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": [
         119,
         117,
         109,

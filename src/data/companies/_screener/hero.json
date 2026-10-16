@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/HEROMOTOCO/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/HEROMOTOCO/consolidated/#quarters"
   },
-  "fetchedAt": "2026-10-15T08:32:09.248Z",
+  "fetchedAt": "2026-10-16T08:26:34.510Z",
   "profitLoss": {
     "periods": [
       "FY15",
@@ -454,7 +454,7 @@
         3463,
         7227
       ],
-      "CFO/OP": [
+      "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": [
         90,
         109,
         113,

@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/OLAELEC/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/OLAELEC/consolidated/#quarters"
   },
-  "fetchedAt": "2026-10-15T08:32:11.798Z",
+  "fetchedAt": "2026-10-16T08:26:36.838Z",
   "profitLoss": {
     "periods": [
       "FY21",
@@ -274,7 +274,7 @@
         -3367,
         -1492
       ],
-      "CFO/OP": [
+      "CFO/EBITDA Share of operating profit converting into cash: CFO (before tax) / Operating Profit": [
         90,
         111,
         121,
