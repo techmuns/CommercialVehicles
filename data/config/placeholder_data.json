@@ -9806,7 +9806,7 @@
     }
   ],
   "_meta": {
-    "last_refresh": "2026-10-20T08:49:15.475Z",
+    "last_refresh": "2026-10-21T08:56:34.581Z",
     "status": "ok",
     "fetchers": {
       "stock_prices": "success",
@@ -9815,6 +9815,6 @@
       "mm": "success",
       "tata": "success"
     },
-    "run_url": "https://github.com/techmuns/CommercialVehicles/actions/runs/39396068664"
+    "run_url": "https://github.com/techmuns/CommercialVehicles/actions/runs/39572067114"
   }
 }
