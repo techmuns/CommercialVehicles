@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/HEROMOTOCO/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/HEROMOTOCO/consolidated/#quarters"
   },
-  "fetchedAt": "2026-11-03T11:14:37.404Z",
+  "fetchedAt": "2026-11-04T11:26:30.942Z",
   "profitLoss": {
     "periods": [
       "FY15",
@@ -42,6 +42,21 @@
         40923,
         47411,
         53562
+      ],
+      "Sales growth": [
+        9,
+        3,
+        1,
+        13,
+        5,
+        -14,
+        6,
+        -5,
+        16,
+        11,
+        8,
+        16,
+        27
       ],
       "Expenses": [
         24018,
@@ -614,6 +629,21 @@
         12978,
         13126,
         14970
+      ],
+      "YoY Sales growth": [
+        4,
+        21,
+        14,
+        15,
+        10,
+        5,
+        4,
+        -5,
+        17,
+        22,
+        30,
+        35,
+        23
       ],
       "Expenses": [
         8174,

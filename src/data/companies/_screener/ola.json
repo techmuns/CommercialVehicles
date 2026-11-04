@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/OLAELEC/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/OLAELEC/consolidated/#quarters"
   },
-  "fetchedAt": "2026-11-03T11:14:39.829Z",
+  "fetchedAt": "2026-11-04T11:26:33.470Z",
   "profitLoss": {
     "periods": [
       "FY21",
@@ -30,6 +30,15 @@
         4514,
         2253,
         1880
+      ],
+      "Sales growth": [
+        null,
+        43321,
+        605,
+        90,
+        -10,
+        -50,
+        -49
       ],
       "Expenses": [
         278,
@@ -375,6 +384,21 @@
         470,
         265,
         455
+      ],
+      "YoY Sales growth": [
+        null,
+        null,
+        null,
+        null,
+        32,
+        39,
+        -19,
+        -62,
+        -50,
+        -43,
+        -55,
+        -57,
+        -45
       ],
       "Expenses": [
         1461,

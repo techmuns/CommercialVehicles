@@ -10,7 +10,7 @@
     "ratios": "https://www.screener.in/company/BAJAJ-AUTO/consolidated/#ratios",
     "quarters": "https://www.screener.in/company/BAJAJ-AUTO/consolidated/#quarters"
   },
-  "fetchedAt": "2026-11-03T11:14:36.239Z",
+  "fetchedAt": "2026-11-04T11:26:29.685Z",
   "profitLoss": {
     "periods": [
       "FY15",
@@ -42,6 +42,21 @@
         50995,
         62905,
         80851
+      ],
+      "Sales growth": [
+        7,
+        5,
+        -4,
+        16,
+        20,
+        -1,
+        -7,
+        19,
+        10,
+        23,
+        14,
+        23,
+        48
       ],
       "Expenses": [
         17467,
@@ -614,6 +629,21 @@
         17832,
         21689,
         25126
+      ],
+      "YoY Sales growth": [
+        6,
+        31,
+        29,
+        16,
+        22,
+        8,
+        9,
+        10,
+        19,
+        23,
+        41,
+        65,
+        60
       ],
       "Expenses": [
         8708,
